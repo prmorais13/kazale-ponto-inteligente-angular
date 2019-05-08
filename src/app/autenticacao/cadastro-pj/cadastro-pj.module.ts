@@ -14,6 +14,7 @@ import {
   MatSnackBarModule
 } from '@angular/material';
 
+import { SharedModule } from '../../shared/shared.module';
 import { CadastroPjRoutingModule } from './cadastro-pj-routing.module';
 
 import { CadastroPjComponent } from './components/cadastro-pj.component';
@@ -33,6 +34,7 @@ import { CadastrarPjComponent } from './components/cadastrar-pj/cadastrar-pj.com
     MatIconModule,
     MatSnackBarModule,
     FlexLayoutModule,
+    SharedModule,
     CadastroPjRoutingModule
   ]
 })
