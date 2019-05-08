@@ -15,8 +15,9 @@ import {
 } from '@angular/material';
 
 import { CadastroPjRoutingModule } from './cadastro-pj-routing.module';
-import { CadastrarPjComponent } from './cadastrar-pj/cadastrar-pj.component';
-import { CadastroPjComponent } from './cadastro-pj.component';
+
+import { CadastroPjComponent } from './components/cadastro-pj.component';
+import { CadastrarPjComponent } from './components/cadastrar-pj/cadastrar-pj.component';
 
 @NgModule({
   declarations: [CadastrarPjComponent, CadastroPjComponent],
