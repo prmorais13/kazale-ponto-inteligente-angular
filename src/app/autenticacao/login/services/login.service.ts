@@ -10,11 +10,11 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class LoginService {
-  private readonly PATH = 'auth';
+  private readonly PATH = `${environment.baseUrl}/auth`;
 
   constructor(private http: HttpClient) {}
 
   logar(login: LoginModel): Observable<any> {
-    return this.http.post(`${environment.baseUrl}/${this.PATH}`, login);
+    return this.http.post(`${this.PATH}`, login);
   }
 }
