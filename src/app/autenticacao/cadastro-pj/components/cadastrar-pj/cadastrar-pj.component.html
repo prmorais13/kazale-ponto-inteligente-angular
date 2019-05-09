@@ -2,47 +2,37 @@
   <mat-list>
     <mat-list-item>
       <mat-form-field>
-        <input matInput formControlName="cnpj" type="text" placeholder="CNPJ" />
+        <input matInput formControlName="cnpj" type="text" placeholder="CNPJ" mascara="99.999.999/9999-99" />
       </mat-form-field>
     </mat-list-item>
 
     <mat-list-item>
       <mat-form-field>
-        <input
-          matInput formControlName="razaoSocial" type="text" placeholder="Razão Social"
-        />
+        <input matInput formControlName="razaoSocial" type="text" placeholder="Razão Social" />
       </mat-form-field>
     </mat-list-item>
 
     <mat-list-item>
       <mat-form-field>
-        <input
-          matInput formControlName="cpf" type="text" placeholder="CPF"
-        />
+        <input matInput formControlName="cpf" type="text" placeholder="CPF" mascara="999.999.999-99" />
       </mat-form-field>
     </mat-list-item>
 
     <mat-list-item>
       <mat-form-field>
-        <input
-          matInput formControlName="nome" type="text" placeholder="Nome"
-        />
+        <input matInput formControlName="nome" type="text" placeholder="Nome" />
       </mat-form-field>
     </mat-list-item>
 
     <mat-list-item>
       <mat-form-field>
-        <input
-          matInput formControlName="email" type="text" placeholder="Email"
-        />
+        <input matInput formControlName="email" type="text" placeholder="Email" />
       </mat-form-field>
     </mat-list-item>
 
     <mat-list-item>
       <mat-form-field>
-        <input
-          matInput formControlName="senha" type="password" placeholder="Senha"
-        />
+        <input matInput formControlName="senha" type="password" placeholder="Senha" />
       </mat-form-field>
       <span matTooltip="Senha deve conter ao menos 6 caracteres!">
         <mat-icon>help</mat-icon>
@@ -50,9 +40,7 @@
     </mat-list-item>
 
     <mat-list-item fxLayoutAlign="center">
-      <button
-        mat-raised-button
-        (click)="cadastrarPj()" color="primary" [disabled]="form.invalid">
+      <button mat-raised-button (click)="cadastrarPj()" color="primary" [disabled]="form.invalid">
         Cadastrar
       </button>
       &nbsp;
