@@ -3,7 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { MatSnackBar } from '@angular/material';
+
+import { CadastroPjService } from '../../services/cadastro-pj.service';
 import { CadastroPjModel } from '../../models/cadastro-pj.model';
+
 import { CpfValidator } from '../../../../shared/validators/cpf.validator';
 import { CnpjValidator } from '../../../../shared/validators/cnpj.validator';
 
@@ -19,7 +22,8 @@ export class CadastrarPjComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private cadastroService: CadastroPjService
   ) {}
 
   ngOnInit() {
@@ -43,7 +47,23 @@ export class CadastrarPjComponent implements OnInit {
     }
 
     const cadastroPj: CadastroPjModel = this.form.value;
+    this.cadastroService.cadastrar(cadastroPj).subscribe(
+      data => {
+        console.log(JSON.stringify(data));
+        const msg = 'Realize o login para acessar o sistema!';
+        this.snackBar.open(msg, 'Sucesso', { duration: 5000 });
+        this.router.navigate(['/login']);
+      },
+      error => {
+        console.log(JSON.stringify(error));
+        let msg = 'Tente novamente em instantes!';
 
-    alert(JSON.stringify(cadastroPj));
+        if (error.status === 400) {
+          msg = error.error.errors.join(' ');
+        }
+        this.snackBar.open(msg, 'Erro', { duration: 5000 });
+      }
+    );
+    return false;
   }
 }
