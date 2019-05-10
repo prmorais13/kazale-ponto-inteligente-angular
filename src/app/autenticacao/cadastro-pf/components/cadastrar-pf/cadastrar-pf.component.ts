@@ -1,3 +1,4 @@
+import { CadastroPfService } from './../../services/cadastro-pf.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -20,7 +21,8 @@ export class CadastrarPfComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private cadastroPfService: CadastroPfService
   ) {}
 
   ngOnInit() {
@@ -44,23 +46,23 @@ export class CadastrarPfComponent implements OnInit {
 
     const cadastroPf: CadastroPfModel = this.form.value;
     console.log(JSON.stringify(cadastroPf));
-    // this.cadastroService.cadastrar(cadastroPj).subscribe(
-    //   data => {
-    //     console.log(JSON.stringify(data));.moe
-    //     const msg = 'Realize o login para acessar o sistema!';
-    //     this.snackBar.open(msg, 'Sucesso', { duration: 5000 });
-    //     this.router.navigate(['/login']);
-    //   },
-    //   error => {
-    //     console.log(JSON.stringify(error));
-    //     let msg = 'Tente novamente em instantes!';
+    this.cadastroPfService.cadastrar(cadastroPf).subscribe(
+      data => {
+        console.log(JSON.stringify(data));
+        const msg = 'Realize o login para acessar o sistema!';
+        this.snackBar.open(msg, 'Sucesso', { duration: 5000 });
+        this.router.navigate(['/login']);
+      },
+      error => {
+        console.log(JSON.stringify(error));
+        let msg = 'Tente novamente em instantes!';
 
-    //     if (error.status === 400) {
-    //       msg = error.error.errors.join(' ');
-    //     }
-    //     this.snackBar.open(msg, 'Erro', { duration: 5000 });
-    //   }
-    // );
+        if (error.status === 400) {
+          msg = error.error.errors.join(' ');
+        }
+        this.snackBar.open(msg, 'Erro', { duration: 5000 });
+      }
+    );
     return false;
   }
 }
