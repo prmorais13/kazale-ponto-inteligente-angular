@@ -12,6 +12,7 @@ import { CadastroPjModule } from './autenticacao/cadastro-pj/cadastro-pj.module'
 import { CadastroPfModule } from './autenticacao/cadastro-pf/cadastro-pf.module';
 
 import { AppComponent } from './app.component';
+import { FuncionarioModule } from './funcionario/funcionario.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { AppComponent } from './app.component';
     LoginModule,
     CadastroPjModule,
     CadastroPfModule,
+    FuncionarioModule,
     // Esse modulo tem que ser o último
     AppRoutingModule
   ],

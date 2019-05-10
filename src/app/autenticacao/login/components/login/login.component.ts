@@ -44,28 +44,28 @@ export class LoginComponent implements OnInit {
 
     this.loginService.logar(login).subscribe(
       data => {
-        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
         localStorage.token = data.data.token;
         const usuarioData = JSON.parse(atob(data.data.token.split('.')[1]));
         console.log(JSON.stringify(usuarioData));
 
         if (usuarioData.role === 'ROLE_ADMIN') {
-          alert('Deve redirecionar para a página de admin');
-          // this.router.navigate(['/admin']);
+          // alert('Deve redirecionar para a página de admin');
+          this.router.navigate(['/admin']);
         } else {
-          alert('Deve redirecionar para a página de funcionário');
-           // this.router.navigate(['/funcionario']);
+          // alert('Deve redirecionar para a página de funcionário');
+          this.router.navigate(['/funcionario']);
         }
-      }, error => {
-        console.log(JSON.stringify(error));
+      },
+      error => {
+        // console.log(JSON.stringify(error));
         let msg = 'Tente novamente em instantes';
 
         if (error.status === 401) {
           msg = 'Email/Senha inválido(s)';
         }
-        this.snackBar.open(msg, 'Erro', {duration: 5000})
+        this.snackBar.open(msg, 'Erro', { duration: 5000 });
       }
-    )
-
+    );
   }
 }
