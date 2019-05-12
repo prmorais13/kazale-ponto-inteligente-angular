@@ -58,7 +58,7 @@ export class LancamentoComponent implements OnInit {
 
   cadastrar(tipo: Tipo) {
     alert(
-      `Tipo: ${tipo}, dataAtualEn: ${this.dataAtualEn}, geolocarion: ${
+      `Tipo: ${tipo}, dataAtualEn: ${this.dataAtualEn}, geolocation: ${
         this.geoLocation
       }`
     );
