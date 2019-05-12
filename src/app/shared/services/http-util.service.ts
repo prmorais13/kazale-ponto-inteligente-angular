@@ -16,7 +16,7 @@ export class HttpUtilService {
         `Bearer ${localStorage.token}`
       );
     }
-    return { headres: httpHeaders };
+    return { headers: httpHeaders };
   }
 
   obterIdUsuario(): string {
