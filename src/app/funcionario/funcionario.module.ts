@@ -22,8 +22,11 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatCardModule
+  MatCardModule,
+  MatPaginatorIntl
 } from '@angular/material';
+
+import { PtBrMatPaginatorIntlService } from '../shared/pt-br-mat-paginator-intl.service';
 
 // import { FuncionarioComponent } from './components/funcionario.component';
 
@@ -46,6 +49,9 @@ import {
     MatCardModule,
 
     FuncionarioRoutingModule
+  ],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntlService }
   ]
 })
 export class FuncionarioModule {}
