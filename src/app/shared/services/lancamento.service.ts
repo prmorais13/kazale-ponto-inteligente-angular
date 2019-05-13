@@ -13,16 +13,16 @@ import { LancamentoModel } from '../models/lancamento.model';
   providedIn: 'root'
 })
 export class LancamentoService {
-  private readonly PATH = '/lancamentos';
-  private readonly PATH_ULTIMO_LANC = `/funcionario/${this.httpUtil.obterIdUsuario()}/ultimo`;
-  private readonly PATH_LANCAMENTOS = '/funcionario/{funcionarioId}';
-  private readonly PATH_TODOS_LANC = '/funcionario/{funcionarioId}/todos';
+  private readonly PATH = 'lancamentos';
+  private readonly PATH_ULTIMO_LANC = `funcionario/${this.httpUtil.obterIdUsuario()}/ultimo`;
+  private readonly PATH_LANCAMENTOS = `funcionario/${this.httpUtil.obterIdUsuario()}`;
+  private readonly PATH_TODOS_LANC = `funcionario/${this.httpUtil.obterIdUsuario()}/todos`;
 
   constructor(private http: HttpClient, private httpUtil: HttpUtilService) {}
 
   buscarUltimoLancamento(): Observable<any> {
     return this.http.get(
-      environment.baseApiUrl + this.PATH + this.PATH_ULTIMO_LANC,
+      `${environment.baseApiUrl}/${this.PATH}/${this.PATH_ULTIMO_LANC}`,
       this.httpUtil.headers()
     );
   }
@@ -31,6 +31,13 @@ export class LancamentoService {
     return this.http.post(
       `${environment.baseApiUrl}/${this.PATH}`,
       lancamento,
+      this.httpUtil.headers()
+    );
+  }
+
+  listarTodosLancamentos(): Observable<any> {
+    return this.http.get(
+      `${environment.baseApiUrl}/${this.PATH}/${this.PATH_TODOS_LANC}`,
       this.httpUtil.headers()
     );
   }
