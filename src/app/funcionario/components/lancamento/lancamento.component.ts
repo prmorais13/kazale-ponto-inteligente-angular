@@ -5,7 +5,11 @@ import * as moment from 'moment';
 
 import { MatSnackBar } from '@angular/material';
 
+import { HttpUtilService } from './../../../shared/services/http-util.service';
+import { LancamentoService } from './../../../shared/services/lancamento.service';
+
 import { Tipo } from './../../../shared/models/tipo.enum';
+import { LancamentoModel } from 'src/app/shared/models/lancamento.model';
 
 declare var navigator: any;
 
@@ -20,12 +24,18 @@ export class LancamentoComponent implements OnInit {
   geoLocation: string;
   ultimoTipoLancado: string;
 
-  constructor(private snackBar: MatSnackBar, private router: Router) {}
+  constructor(
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private httpUtil: HttpUtilService,
+    private lancamentoService: LancamentoService
+  ) {}
 
   ngOnInit() {
     this.dataAtual = moment().format('DD/MM/YYYY HH:mm:ss');
     this.dataAtualEn = moment().format('YYYY-MM-DD HH:mm:ss');
     this.obterGeoLocation();
+    this.ultimoTipoLancado = '';
     this.obterUltimoLancamento();
   }
 
@@ -57,10 +67,26 @@ export class LancamentoComponent implements OnInit {
   }
 
   cadastrar(tipo: Tipo) {
-    alert(
-      `Tipo: ${tipo}, dataAtualEn: ${this.dataAtualEn}, geolocation: ${
-        this.geoLocation
-      }`
+    const lancamento: LancamentoModel = new LancamentoModel(
+      this.dataAtualEn,
+      tipo,
+      this.geoLocation,
+      this.httpUtil.obterIdUsuario()
+    );
+
+    this.lancamentoService.cadastrar(lancamento).subscribe(
+      data => {
+        const msg = 'Lançamento cadastrado com sucesso!';
+        this.snackBar.open(msg, 'Sucesso', { duration: 5000 });
+        this.router.navigate(['/funcionario/listagem']);
+      },
+      error => {
+        let msg = 'Tente novamente em instantes!';
+        if (error.status === 400) {
+          msg = error.error.errors.join(' ');
+        }
+        this.snackBar.open(msg, 'Erro', { duration: 5000 });
+      }
     );
   }
 
@@ -83,14 +109,24 @@ export class LancamentoComponent implements OnInit {
       this.ultimoTipoLancado === Tipo.TERMINO_ALMOCO
     );
   }
+
   exibirInicioAlmoco(): boolean {
     return this.ultimoTipoLancado === Tipo.INICIO_TRABALHO;
   }
+
   exibirTerminoAlmoco(): boolean {
     return this.ultimoTipoLancado === Tipo.INICIO_ALMOCO;
   }
 
   obterUltimoLancamento() {
-    this.ultimoTipoLancado = Tipo.INICIO_TRABALHO;
+    this.lancamentoService.buscarUltimoLancamento().subscribe(
+      data => {
+        this.ultimoTipoLancado = data.data ? data.data.tipo : '';
+      },
+      error => {
+        const msg = 'Erro obtendo último lançamento!';
+        this.snackBar.open(msg, 'Erro', { duration: 5000 });
+      }
+    );
   }
 }
