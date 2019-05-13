@@ -27,6 +27,7 @@ import {
 } from '@angular/material';
 
 import { PtBrMatPaginatorIntlService } from '../shared/pt-br-mat-paginator-intl.service';
+import { SharedModule } from '../shared/shared.module';
 
 // import { FuncionarioComponent } from './components/funcionario.component';
 
@@ -47,6 +48,7 @@ import { PtBrMatPaginatorIntlService } from '../shared/pt-br-mat-paginator-intl.
     MatPaginatorModule,
     MatSortModule,
     MatCardModule,
+    SharedModule,
 
     FuncionarioRoutingModule
   ],
