@@ -3,7 +3,28 @@ import { CommonModule } from '@angular/common';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import {
+  MatInputModule,
+  MatButtonModule,
+  MatListModule,
+  MatTooltipModule,
+  MatIconModule,
+  MatSnackBarModule,
+  MatTableModule,
+  MatSelectModule,
+  MatRadioModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatDialogModule,
+  MatPaginatorModule,
+  MatPaginatorIntl,
+  MatSortModule,
+  MAT_DATE_LOCALE
+} from '@angular/material';
+
 import { AdminRoutingModule } from './';
+import { SharedModule } from '../shared/shared.module';
+import { PtBrMatPaginatorIntlService } from '../shared/pt-br-mat-paginator-intl.service';
 
 import {
   ListagemComponent,
@@ -22,6 +43,30 @@ import {
     AtualizacaoComponent,
     AdminComponent
   ],
-  imports: [CommonModule, FlexLayoutModule, AdminRoutingModule]
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatInputModule,
+    MatButtonModule,
+    MatListModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDialogModule,
+    MatPaginatorModule,
+    MatSortModule,
+    SharedModule,
+
+    AdminRoutingModule
+  ],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'pt_BR' },
+    { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntlService }
+  ]
 })
 export class AdminModule {}
