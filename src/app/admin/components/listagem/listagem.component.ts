@@ -9,6 +9,7 @@ import {
 
 import { HttpUtilService } from '../../../shared/services/http-util.service';
 import { LancamentoService } from '../../../shared/services/lancamento.service';
+import { FuncionarioService } from 'src/app/shared/services/funcionario.service';
 import { LancamentoModel } from '../../../shared/models/lancamento.model';
 
 @Component({
@@ -30,7 +31,8 @@ export class ListagemComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private httpUtil: HttpUtilService,
     private snackBar: MatSnackBar,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private funcionarioService: FuncionarioService
   ) {}
 
   ngOnInit() {
