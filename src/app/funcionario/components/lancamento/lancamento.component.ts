@@ -8,8 +8,8 @@ import { MatSnackBar } from '@angular/material';
 import { HttpUtilService } from './../../../shared/services/http-util.service';
 import { LancamentoService } from './../../../shared/services/lancamento.service';
 
-import { Tipo } from './../../../shared/models/tipo.enum';
-import { LancamentoModel } from 'src/app/shared/models/lancamento.model';
+import { LancamentoModel } from '../../../shared/models/lancamento.model';
+import { Tipo } from '../../../shared/models/tipo.enum';
 
 declare var navigator: any;
 
@@ -85,6 +85,7 @@ export class LancamentoComponent implements OnInit {
         if (error.status === 400) {
           msg = error.error.errors.join(' ');
         }
+
         this.snackBar.open(msg, 'Erro', { duration: 5000 });
       }
     );
