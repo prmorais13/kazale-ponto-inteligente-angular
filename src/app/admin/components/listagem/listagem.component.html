@@ -1,9 +1,16 @@
+<form [formGroup]="form" novalidate>
+  <mat-form-field>
+    <mat-label>Selecione um funcionário</mat-label>
+    <mat-select formControlName="funcs" [(value)]="selected" (selectionChange)="exibirLancamentos()">
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let funcionario of funcionarios" [value]="funcionario.id">{{ funcionario.nome }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+
 <a mat-button color="warn" routerLink="/admin/cadastro" *ngIf="funcionarioId">Adicionar lancamento</a>
 
 <mat-table [dataSource]="dataSource" matSort (matSortChange)="ordenar($event)">
-
-  <!-- <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: colunas;"></mat-row> -->
 
   <ng-container matColumnDef="data">
     <mat-header-cell *matHeaderCellDef mat-sort-header>

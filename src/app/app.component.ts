@@ -13,6 +13,7 @@ export class AppComponent {
 
   sair() {
     delete localStorage.token;
+    delete sessionStorage.funcionarioId;
     this.router.navigate(['/']);
   }
 

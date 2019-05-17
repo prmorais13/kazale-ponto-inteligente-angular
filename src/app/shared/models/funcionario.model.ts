@@ -1,6 +1,6 @@
 import { LancamentoModel } from './lancamento.model';
 
-export class Funcionario {
+export class FuncionarioModel {
   constructor(
     public nome: string,
     public email: string,
