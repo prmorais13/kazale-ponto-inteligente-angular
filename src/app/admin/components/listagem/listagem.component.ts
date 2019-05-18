@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
   MatTableDataSource,
@@ -148,29 +148,29 @@ export class ListagemComponent implements OnInit {
   }
 
   remover(lancamentoId: string) {
-    if (lancamentoId) {
-      this.lancamentoService.remover(lancamentoId).subscribe(
-        data => {
-          const msg = 'Lançamento removido com sucesso!';
-          this.snackBar.open(msg, 'Sucesso', { duration: 5000 });
-          this.exibirLancamentos();
-        },
-        err => {
-          let msg = 'Erro ao remover lançamento. Tente em instantes!';
-          if (err.status === 400) {
-            msg = err.error.errors.join(' ');
-          }
-          this.snackBar.open(msg, 'Erro', { duration: 5000 });
+    this.lancamentoService.remover(lancamentoId).subscribe(
+      data => {
+        const msg = 'Lançamento removido com sucesso!';
+        this.snackBar.open(msg, 'Sucesso', { duration: 5000 });
+        this.exibirLancamentos();
+      },
+      err => {
+        let msg = 'Erro ao remover lançamento. Tente em instantes!';
+        if (err.status === 400) {
+          msg = err.error.errors.join(' ');
         }
-      );
-    }
+        this.snackBar.open(msg, 'Erro', { duration: 5000 });
+      }
+    );
   }
 }
 
 @Component({
   selector: 'app-confirma-dialog',
   template: `
-    <h1 mat-dialog-titles>Deseja realmente remover o lançamento?</h1>
+    <h2 mat-dialog-titles>
+      Deseja realmente remover o lançamento {{ lancamentoId }}?
+    </h2>
     <div mat-dialog-actions>
       <button mat-button [mat-dialog-close]="false" tab-index="-1">
         Não
@@ -182,5 +182,5 @@ export class ListagemComponent implements OnInit {
   `
 })
 export class ConfirmaDialogComponent {
-  constructor(@inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 }
