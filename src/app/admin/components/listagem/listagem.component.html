@@ -1,7 +1,7 @@
 <form [formGroup]="form" novalidate>
   <mat-form-field>
     <mat-label>Selecione um funcionário</mat-label>
-    <mat-select formControlName="funcs" [(value)]="selected" (selectionChange)="exibirLancamentos()">
+    <mat-select formControlName="funcs" [(value)]="funcionarioId" (selectionChange)="exibirLancamentos()">
       <mat-option>None</mat-option>
       <mat-option *ngFor="let funcionario of funcionarios" [value]="funcionario.id">{{ funcionario.nome }}</mat-option>
     </mat-select>

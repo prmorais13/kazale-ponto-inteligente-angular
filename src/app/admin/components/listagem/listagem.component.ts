@@ -169,7 +169,7 @@ export class ListagemComponent implements OnInit {
   selector: 'app-confirma-dialog',
   template: `
     <h2 mat-dialog-titles>
-      Deseja realmente remover o lançamento {{ lancamentoId }}?
+      Deseja realmente remover o lançamento?
     </h2>
     <div mat-dialog-actions>
       <button mat-button [mat-dialog-close]="false" tab-index="-1">
