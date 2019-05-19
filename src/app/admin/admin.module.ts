@@ -69,7 +69,7 @@ import {
     AdminRoutingModule
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'pt_BR' },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntlService }
   ],
   entryComponents: [ConfirmaDialogComponent]
