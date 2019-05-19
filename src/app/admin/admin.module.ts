@@ -27,6 +27,7 @@ import { AdminRoutingModule } from './';
 import { SharedModule } from '../shared/shared.module';
 import { PtBrMatPaginatorIntlService } from '../shared/pt-br-mat-paginator-intl.service';
 
+import { AdminGuard } from './guards/admin.guard';
 import {
   ListagemComponent,
   CadastroComponent,
@@ -70,7 +71,8 @@ import {
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
-    { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntlService }
+    { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntlService },
+    AdminGuard
   ],
   entryComponents: [ConfirmaDialogComponent]
 })

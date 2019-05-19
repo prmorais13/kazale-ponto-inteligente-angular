@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AdminGuard } from './guards/admin.guard';
 import {
   AdminComponent,
   ListagemComponent,
@@ -12,6 +13,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AdminGuard],
     children: [
       {
         path: '',

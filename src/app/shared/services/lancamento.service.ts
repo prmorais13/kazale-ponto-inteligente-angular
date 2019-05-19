@@ -63,4 +63,19 @@ export class LancamentoService {
       this.httpUtil.headers()
     );
   }
+
+  buscarPorId(lancamentoId: string): Observable<any> {
+    return this.http.get(
+      `${environment.baseApiUrl}/${this.PATH}/${lancamentoId}`,
+      this.httpUtil.headers()
+    );
+  }
+
+  atualizar(lancamento: LancamentoModel): Observable<any> {
+    return this.http.put(
+      `${environment.baseApiUrl}/${this.PATH}/${lancamento.id}`,
+      lancamento,
+      this.httpUtil.headers()
+    );
+  }
 }
